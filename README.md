@@ -67,3 +67,12 @@
 
 : prop이 바뀌지 않는다면 컴포넌트를 렌더링하지 않도록 한다.
 => React.memo(DraggableCard)를 하면 순서가 바뀌지 않는 toDo는 리렌더링하지 않는다.
+
+### Object.keys(objectname)
+
+: object가 가진 key만 array로 반환한다. -> boardID로 활용
+`Object.keys(toDos).map(boardId => toDos[boardId]`
+
+### Object.values(objectname)
+
+:object의 각 배열을 반환한다.
