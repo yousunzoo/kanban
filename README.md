@@ -1,46 +1,27 @@
-# Getting Started with Create React App
+# 칸반 보드
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+: 단계별 작업 현황을 열(column) 형식의 보드 형태로 시각화
 
-## Available Scripts
+- 드래그 앤 드롭 기능 구현
 
-In the project directory, you can run:
+## recoil
 
-### `npm start`
+### selector
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- selector는 쓰기 가능한 상태를 반환한다.
+  `const hourSelector = selector({key:"hours", get : ({get})=>{return ~}, set : ({set}) => {return ~}})`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- input의 value는 타입과 관계없이 문자열을 반환한다.
+- string 형식으로 된 숫자를 number로 바꿔주는 방법 -> 앞에 +를 붙여준다.
+- +"1" => 1
 
-### `npm test`
+* 연습하기) 시간 <-> 분 단위 변환기 만들기
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- minutes input 과 hours input 어느 쪽에서 입력하던지 그 값을 변환해주는 변환기.
+- recoil selector를 이용해서 만들기
 
-### `npm run build`
+- get : 다른 atom이나 selector로부터 값을 찾는데 사용되는 함수.
+- set : 원하는 state가 어떤 것이던지 그걸로 수정하게끔 해준다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- set의 첫 번째 매개변수는 Recoil state, 두번째 매개변수는 새로운 값이다. 새로운 값은 업데이트 합수나 재설정 액션을 전파하는 DefaultValue 객체일 수 있다.
+  `set : ({set}, newValue) => set(myAtom, newValue)`
