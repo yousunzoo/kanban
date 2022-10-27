@@ -45,7 +45,7 @@ body {
   line-height: 1;  
   font-family: 'Source Sans Pro', sans-serif;
   background-color:${(props) => props.theme.bgColor};
-  color:${(props) => props.theme.textColor};
+  color:black;
   transition : all 0.3s ease-in;
 }
 menu, ol, ul {

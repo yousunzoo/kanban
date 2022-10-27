@@ -27,3 +27,17 @@
   `set : ({set}, newValue) => set(myAtom, newValue)`
 
 ## drag and drop
+
+- react-beautiful-dnd : React로 list를 만들기 위한 아름답고 접근 가능한 드래그 앤 드롭 라이브러리
+
+- `<DragDropContext>`, `<Droppable>`, `<Draggable>`로 구성되어 짐.
+- DragDropContext는 드래그 앤 드롭을 가능하게 하고자 하는 영역을 감싸는 컴포넌트이다.
+- Droppable : 무언가를 드래그 앤 드롭할 수 있는 영역
+- Draggable : droppable 영역 안에서 드래그 하는 영역
+- droppable과 draggable의 children에는 함수만 넣을 수 있다.
+
+- dragHandleProps : 특정 영역을 통해서만 드래그를 가능하도록 하고 싶을 때 사용한다.
+- droppable과 draggable은 provided라는 객체를 제공한다. provided 안에서 dragHandleProps, draggableProps, droppableProps, innerRef 등을 꺼내 쓸 수 있다.
+
+- dragHandleProps : 특정 영역을 통해서만 드래그를 가능하도록 하고싶을 때 사용한다.
+- provided.placeholder : draggable 엘리먼트를 드래그하는 동안 보드 영역을 position:fixed 적용한다. draggable을 드래그할 때 Droppable 리스트가 작아지는 것을 방지하기 위해 필요하다. </Draggable> 뒤에 {provided.placeholder}를 입력해준다.
