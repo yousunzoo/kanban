@@ -25,3 +25,5 @@
 
 - set의 첫 번째 매개변수는 Recoil state, 두번째 매개변수는 새로운 값이다. 새로운 값은 업데이트 합수나 재설정 액션을 전파하는 DefaultValue 객체일 수 있다.
   `set : ({set}, newValue) => set(myAtom, newValue)`
+
+## drag and drop
