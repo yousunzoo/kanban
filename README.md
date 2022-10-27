@@ -41,3 +41,8 @@
 
 - dragHandleProps : 특정 영역을 통해서만 드래그를 가능하도록 하고싶을 때 사용한다.
 - provided.placeholder : draggable 엘리먼트를 드래그하는 동안 보드 영역을 position:fixed 적용한다. draggable을 드래그할 때 Droppable 리스트가 작아지는 것을 방지하기 위해 필요하다. </Draggable> 뒤에 {provided.placeholder}를 입력해준다.
+
+### 드래그 앤 드롭시 list 배열 다시 설정하기
+
+1. .splice(index,1)로 해당 값 삭제하기
+2. .splice(index, 0, "해당 값") => 원하는 자리에, 아무것도 삭제하지 않고 해당 값을 집어 넣는다.
