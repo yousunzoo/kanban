@@ -33,7 +33,7 @@
 - `<DragDropContext>`, `<Droppable>`, `<Draggable>`로 구성되어 짐.
 - DragDropContext는 드래그 앤 드롭을 가능하게 하고자 하는 영역을 감싸는 컴포넌트이다.
 - Droppable : 무언가를 드래그 앤 드롭할 수 있는 영역
-- Draggable : droppable 영역 안에서 드래그 하는 영역
+- Draggable : droppable 영역 안에서 드래그 하는 영역 -- 고유한 key를 추가해야 한다!
 - droppable과 draggable의 children에는 함수만 넣을 수 있다.
 
 - dragHandleProps : 특정 영역을 통해서만 드래그를 가능하도록 하고 싶을 때 사용한다.
@@ -42,7 +42,21 @@
 - dragHandleProps : 특정 영역을 통해서만 드래그를 가능하도록 하고싶을 때 사용한다.
 - provided.placeholder : draggable 엘리먼트를 드래그하는 동안 보드 영역을 position:fixed 적용한다. draggable을 드래그할 때 Droppable 리스트가 작아지는 것을 방지하기 위해 필요하다. </Draggable> 뒤에 {provided.placeholder}를 입력해준다.
 
-### 드래그 앤 드롭시 list 배열 다시 설정하기
+### onDragEnd
+
+- result : DropResult
+- result.draggableId : 드래그되었던 Draggable의 id
+- result.type : 드래그되었던 draggable의 type
+- result.source : draggable이 시작된 위치(location)
+- result.destination : draggable이 끝난 위치(location). 시작한 위치와 같은 위치로 돌아오면 destination 값은 null이 된다.
+
+### Array.prototype.splice()
+
+: 배열의 기존 요소를 삭제 또는 교체하거나 새 요소를 추가하여 배열의 내용을 변경한다. -> 깊은 복사
+
+- 드래그 앤 드롭시 list 배열 다시 설정하기
 
 1. .splice(index,1)로 해당 값 삭제하기
 2. .splice(index, 0, "해당 값") => 원하는 자리에, 아무것도 삭제하지 않고 해당 값을 집어 넣는다.
+
+문제점) 배열을 재조정하는데 시간을 거친다. -- 모든 card를 다시 렌더링하고있기 때문
