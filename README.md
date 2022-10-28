@@ -76,3 +76,14 @@
 ### Object.values(objectname)
 
 :object의 각 배열을 반환한다.
+
+## 구현해야 할 기능
+
+### 보드 내에서의 이동
+
+- to do li의 이름은 draggableId와 동일
+- board의 이름은 drpppableId와 동일
+- source와 destination의 dropppableId 가 같은지 확인 : 한개의 보드 안에서 움직임을 확인
+- 수정이 일어난 보드의 배열만 복사 후 그 복사본을 기존 배열에 붙여넣기 한다.
+
+### 보드 밖으로의 이동
