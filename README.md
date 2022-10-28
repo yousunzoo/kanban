@@ -90,3 +90,8 @@
 
 - source board와 destination board 두 개 복사
 - source board의 item을 제거하고 target board에 item 추가
+
+### 보드를 떠날 때와 도착했을 때 색상을 바꿔야 할 타이밍
+
+- droppable과 draggable은 provided 뿐만 아니라 snapshot도 제공한다.
+- snapshot : isDraggingOver, draggingOverWith, draggingFromThisWith, isUsingPlaceholder에 대한 boolean 값을 받는다.
