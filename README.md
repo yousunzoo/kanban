@@ -87,3 +87,6 @@
 - 수정이 일어난 보드의 배열만 복사 후 그 복사본을 기존 배열에 붙여넣기 한다.
 
 ### 보드 밖으로의 이동
+
+- source board와 destination board 두 개 복사
+- source board의 item을 제거하고 target board에 item 추가
