@@ -8,30 +8,30 @@ interface IDelete {
 
 const Delete = styled.div<IDelete>`
   position: absolute;
+  top: 0;
   bottom: 0;
-  left: 0;
   right: 0;
   margin: auto;
   background-color: ${(props) =>
     props.isDraggingOver ? "#e74c3c" : "#34495e"};
-  width: 150px;
-  height: 75px;
-  border-radius: 75px 75px 0 0;
+  width: 75px;
+  height: 150px;
+  border-radius: 75px 0 0 75px;
   img {
     width: 40px;
     height: auto;
     filter: brightness(0) invert(1);
     position: absolute;
-    right: 0;
-    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 10px;
     margin: auto;
-    bottom: 15px;
   }
 `;
 
 function TrashCan() {
   return (
-    <Droppable droppableId="delete">
+    <Droppable droppableId="trash">
       {(magic, snapshot) => {
         return (
           <Delete ref={magic.innerRef} isDraggingOver={snapshot.isDraggingOver}>

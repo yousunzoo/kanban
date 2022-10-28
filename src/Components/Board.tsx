@@ -1,15 +1,17 @@
-import { useRef } from "react";
+import { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { ITodo, toDoState } from "../atoms";
 import DragabbleCard from "./DragabbleCard";
+import deleteI from "../x-symbol.svg";
+import addI from "../add-symbol.svg";
 
 const Wrapper = styled.div`
   padding-top: 10px;
   background-color: ${(props) => props.theme.boardColor};
-  border-radius: 5px;
+  border-radius: 10px;
   min-height: 200px;
   display: flex;
   flex-direction: column;
@@ -21,19 +23,22 @@ const TitleArea = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+`;
+
+const BtnArea = styled.div`
   button {
     border: none;
-    background-color: #fff;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
   }
 `;
 const Title = styled.h2`
-  text-align: center;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
+  min-width: 150px;
+  text-transform: capitalize;
 `;
 
 interface IAreaProps {
@@ -42,6 +47,7 @@ interface IAreaProps {
   isDragging?: boolean;
 }
 const Area = styled.div<IAreaProps>`
+  border-radius: 5px;
   background-color: ${(props) =>
     props.isDraggingOver
       ? "#ecf0f1"
@@ -50,11 +56,23 @@ const Area = styled.div<IAreaProps>`
       : "transparent"};
   flex-grow: 1;
   transition: background-color 0.3s ease-in-out;
-  padding: 10px;
 `;
 
 const Form = styled.form`
   width: 100%;
+  margin-bottom: 20px;
+  input {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 16px;
+    &::placeholder {
+      text-align: center;
+      font-size: 16px;
+    }
+  }
 `;
 interface IBoardProps {
   toDos: ITodo[];
@@ -67,6 +85,7 @@ interface IForm {
 }
 
 function Board({ toDos, boardId, index }: IBoardProps) {
+  const [on, setOn] = useState(false);
   const setToDos = useSetRecoilState(toDoState);
   const { register, setValue, handleSubmit } = useForm<IForm>();
   const onValid = ({ toDo }: IForm) => {
@@ -81,13 +100,17 @@ function Board({ toDos, boardId, index }: IBoardProps) {
       };
     });
     setValue("toDo", "");
+    setOn(false);
   };
-  const onClick = () => {
+  const onClickD = () => {
     setToDos((prev) => {
       const newBoards = { ...prev };
       delete newBoards[boardId];
       return { ...newBoards };
     });
+  };
+  const onClickA = () => {
+    setOn(true);
   };
   return (
     <Draggable draggableId={boardId} index={index} key={boardId}>
@@ -95,16 +118,23 @@ function Board({ toDos, boardId, index }: IBoardProps) {
         <Wrapper ref={magic.innerRef} {...magic.draggableProps}>
           <TitleArea>
             <Title {...magic.dragHandleProps}>{boardId}</Title>
-            <button type="button" onClick={onClick}>
-              X
-            </button>
+            <BtnArea>
+              <button type="button" onClick={onClickA}>
+                <img src={addI} alt="add" />
+              </button>
+              <button type="button" onClick={onClickD}>
+                <img src={deleteI} alt="delete" />
+              </button>
+            </BtnArea>
           </TitleArea>
           <Form onSubmit={handleSubmit(onValid)}>
-            <input
-              {...register("toDo", { required: true })}
-              type="text"
-              placeholder={`Add task on ${boardId}`}
-            />
+            {on && (
+              <input
+                {...register("toDo", { required: true })}
+                type="text"
+                placeholder={`Add task on ${boardId}`}
+              />
+            )}
           </Form>
           <Droppable droppableId={boardId}>
             {(magic, snapshot) => (
