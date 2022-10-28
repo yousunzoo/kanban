@@ -1,8 +1,9 @@
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { toDoState } from "./atoms";
 import Board from "./Components/Board";
+import trashCan from "./trash-can.svg";
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,6 +22,32 @@ const Boards = styled.div`
   grid-template-columns: repeat(3, 1fr);
 `;
 
+const Delete = styled.div<IDelete>`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: ${(props) =>
+    props.isDraggingOver ? "#e74c3c" : "#34495e"};
+  width: 200px;
+  height: 100px;
+  border-radius: 100px 100px 0 0;
+  img {
+    width: 50px;
+    height: auto;
+    filter: brightness(0) invert(1);
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: auto;
+    bottom: 20px;
+  }
+`;
+
+interface IDelete {
+  isDraggingOver: boolean;
+}
 function App() {
   const [toDos, setToDos] = useRecoilState(toDoState);
   const onDragEnd = (info: DropResult) => {
@@ -68,6 +95,17 @@ function App() {
           ))}
         </Boards>
       </Wrapper>
+      <Droppable droppableId="delete">
+        {(magic, snapshot) => {
+          return (
+            <Delete
+              ref={magic.innerRef}
+              isDraggingOver={snapshot.isDraggingOver}>
+              <img src={trashCan} alt="delete button" />
+            </Delete>
+          );
+        }}
+      </Droppable>
     </DragDropContext>
   );
 }
