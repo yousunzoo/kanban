@@ -109,3 +109,10 @@
 
 1. sourceBoard에서 지우기 전에 taskObj를 잡아두고,
 2. 옮긴 후에 Obj를 splice로 붙여넣기 한다.
+
+# 추가로 해야할 것들
+
+1. task state를 localStorage에 저장하기 [o]
+2. task 삭제하는 버튼 만들기 - 쓰레기통을 만들어서 드롭 삭제 기능 구현 [x]
+3. board 생성하는 form 형성 [x]
+4. board 순서 바꾸기 - board 자체를 하나의 droppable 안에 넣어서 board 들어서 옮길 수 있도록 => board state라는 atom을 만들어서 모든 board의 움직임 추적 (선택형) [x]
