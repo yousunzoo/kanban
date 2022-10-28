@@ -32,8 +32,9 @@ function App() {
       setToDos((allBoards) => {
         // 변화가 일어난 배열만 복사
         const boardCopy = [...allBoards[source.droppableId]];
+        const taskObj = boardCopy[source.index];
         boardCopy.splice(source.index, 1);
-        boardCopy.splice(destination?.index, 0, draggableId);
+        boardCopy.splice(destination?.index, 0, taskObj);
         // boardCopy와 이전의 state와 다른 boards를 모두 return 해야 함
         return {
           ...allBoards,
@@ -45,9 +46,10 @@ function App() {
       // 보드 간의 이동
       setToDos((allBoards) => {
         const sourceBoard = [...allBoards[source.droppableId]];
+        const taskObj = sourceBoard[source.index];
         const destinationBoard = [...allBoards[destination.droppableId]];
         sourceBoard.splice(source.index, 1);
-        destinationBoard.splice(destination?.index, 0, draggableId);
+        destinationBoard.splice(destination?.index, 0, taskObj);
 
         return {
           ...allBoards,

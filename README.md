@@ -106,3 +106,6 @@
 - 이전에는 draggableId와 value가 같았기 때문에 바로 복붙 가능.
 - 이제는 draggableId가 toDo의 id만 의미하니까 다른 방법으로 toDo의 value를 찾아야 한다.
 - 해당 draggableId 값을 가지고 그 Object를 가져와서 붙여넣는 방법이 필요함.
+
+1. sourceBoard에서 지우기 전에 taskObj를 잡아두고,
+2. 옮긴 후에 Obj를 splice로 붙여넣기 한다.
