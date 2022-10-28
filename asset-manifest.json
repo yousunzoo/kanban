@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.js": "/kanban/static/js/main.a0458d07.js",
+    "static/media/trash-can.svg": "/kanban/static/media/trash-can.8edb7a5970af16645c1260770f9354c0.svg",
+    "static/media/add-symbol.svg": "/kanban/static/media/add-symbol.2be5973c3f5a281039746d58b88133ab.svg",
+    "static/media/x-symbol.svg": "/kanban/static/media/x-symbol.f5457199865cf8c177ab311219383786.svg",
+    "index.html": "/kanban/index.html",
+    "main.a0458d07.js.map": "/kanban/static/js/main.a0458d07.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.a0458d07.js"
+  ]
+}
