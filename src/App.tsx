@@ -30,18 +30,18 @@ const Delete = styled.div<IDelete>`
   margin: auto;
   background-color: ${(props) =>
     props.isDraggingOver ? "#e74c3c" : "#34495e"};
-  width: 200px;
-  height: 100px;
-  border-radius: 100px 100px 0 0;
+  width: 150px;
+  height: 75px;
+  border-radius: 75px 75px 0 0;
   img {
-    width: 50px;
+    width: 40px;
     height: auto;
     filter: brightness(0) invert(1);
     position: absolute;
     right: 0;
     left: 0;
     margin: auto;
-    bottom: 20px;
+    bottom: 15px;
   }
 `;
 
@@ -69,7 +69,22 @@ function App() {
         };
       });
     }
-    if (destination.droppableId !== source.droppableId) {
+    if (destination.droppableId === "delete") {
+      // delete button으로 이동시켰을 때
+      setToDos((allBoards) => {
+        // 변화가 일어난 배열만 복사
+        const boardCopy = [...allBoards[source.droppableId]];
+        boardCopy.splice(source.index, 1);
+        return {
+          ...allBoards,
+          [source.droppableId]: boardCopy,
+        };
+      });
+    }
+    if (
+      destination.droppableId !== "delete" &&
+      destination.droppableId !== source.droppableId
+    ) {
       // 보드 간의 이동
       setToDos((allBoards) => {
         const sourceBoard = [...allBoards[source.droppableId]];
