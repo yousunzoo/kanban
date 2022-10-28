@@ -99,3 +99,10 @@
 ### 사용자가 리스트 직접 입력하도록
 
 - useRef() : react 코드를 이용해 HTML 요소를 지정하고, .current 속성으로 가져와서 조작할 수 있는 방법
+
+- `+string` => number, `number + ""` => string
+- 나타나는 문제) 각 보드를 string 값만 들어있었던 배열에서 Object {id : number, text : string}가 들어있는 배열 형식으로 바꾸니까 `boardCopy.splice(destination?.index, 0, draggableId)`를 사용할 수 없음.
+
+- 이전에는 draggableId와 value가 같았기 때문에 바로 복붙 가능.
+- 이제는 draggableId가 toDo의 id만 의미하니까 다른 방법으로 toDo의 value를 찾아야 한다.
+- 해당 draggableId 값을 가지고 그 Object를 가져와서 붙여넣는 방법이 필요함.
