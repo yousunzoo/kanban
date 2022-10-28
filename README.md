@@ -95,3 +95,7 @@
 
 - droppable과 draggable은 provided 뿐만 아니라 snapshot도 제공한다.
 - snapshot : isDraggingOver, draggingOverWith, draggingFromThisWith, isUsingPlaceholder에 대한 boolean 값을 받는다.
+
+### 사용자가 리스트 직접 입력하도록
+
+- useRef() : react 코드를 이용해 HTML 요소를 지정하고, .current 속성으로 가져와서 조작할 수 있는 방법
