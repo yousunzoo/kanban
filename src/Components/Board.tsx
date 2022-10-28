@@ -9,22 +9,32 @@ const Wrapper = styled.div`
   border-radius: 5px;
   min-height: 200px;
 `;
+
+const Title = styled.h2`
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+`;
 interface IBoardProps {
   toDos: string[];
   boardId: string;
 }
 function Board({ toDos, boardId }: IBoardProps) {
   return (
-    <Droppable droppableId={boardId}>
-      {(magic) => (
-        <Wrapper ref={magic.innerRef} {...magic.droppableProps}>
-          {toDos.map((toDo, index) => (
-            <DragabbleCard key={toDo} index={index} toDo={toDo} />
-          ))}
-          {magic.placeholder}
-        </Wrapper>
-      )}
-    </Droppable>
+    <Wrapper>
+      <Title>{boardId}</Title>
+      <Droppable droppableId={boardId}>
+        {(magic) => (
+          <div ref={magic.innerRef} {...magic.droppableProps}>
+            {toDos.map((toDo, index) => (
+              <DragabbleCard key={toDo} index={index} toDo={toDo} />
+            ))}
+            {magic.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </Wrapper>
   );
 }
 
