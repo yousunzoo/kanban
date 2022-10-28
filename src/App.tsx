@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { boardState, toDoState } from "./atoms";
 import Board from "./Components/Board";
 import TrashCan from "./Components/TrashCan";
+import AddCategory from "./Components/AddCategory";
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,18 +25,13 @@ const Boards = styled.div`
   grid-template-columns: repeat(3, 1fr);
 `;
 
-interface IForm {
-  board: any;
-}
 function App() {
-  const { register, setValue, handleSubmit } = useForm<IForm>();
   const [toDos, setToDos] = useRecoilState(toDoState);
-  const [boards, setBoard] = useRecoilState(boardState);
   const onDragEnd = (info: DropResult) => {
     console.log(info);
-    const { destination, draggableId, source } = info;
+    const { destination, source } = info;
     if (!destination) return;
-    if (destination?.droppableId === source?.droppableId) {
+    if (destination?.index === source?.index) {
       // 보드 내에서의 이동
       setToDos((allBoards) => {
         // 변화가 일어난 배열만 복사
@@ -49,6 +45,9 @@ function App() {
           [source.droppableId]: boardCopy,
         };
       });
+    }
+    if (destination?.index !== source?.index) {
+      // 보드 자체를 이동
     }
     if (destination.droppableId === "delete") {
       // delete button으로 이동시켰을 때
@@ -82,38 +81,20 @@ function App() {
       });
     }
   };
-  const onValid = ({ board }: IForm) => {
-    const newBoard = board;
-    console.log(newBoard);
-    setBoard((allBoards) => {
-      return [...allBoards, newBoard];
-    });
-    setToDos((allBoards) => {
-      return {
-        ...allBoards,
-        [newBoard]: [],
-      };
-    });
-    console.log(boards);
-    setValue("board", "");
-  };
+
   return (
     <>
-      <form onSubmit={handleSubmit(onValid)}>
-        <input
-          {...register("board", { required: true })}
-          placeholder="새 보드의 이름을 입력하세요"
-        />
-      </form>
+      <AddCategory />
       <DragDropContext onDragEnd={onDragEnd}>
         <Wrapper>
           <Droppable droppableId="boards" direction="horizontal" type="board">
             {(magic) => (
               <Boards ref={magic.innerRef} {...magic.droppableProps}>
-                {Object.keys(toDos).map((boardId) => (
+                {Object.keys(toDos).map((boardId, index) => (
                   <Board
                     boardId={boardId}
                     key={boardId}
+                    index={index}
                     toDos={toDos[boardId]}
                   />
                 ))}
